@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora Mario</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/mario-coin.mp3"></audio>
+  <audio id="failSound" src="midia/Mario Death - QuickSounds.com.mp3"></audio>
+
+
+  <div class="tabs">
+    <button onclick="switchMode('calc')" class="active">Calculadora</button>
+    <button onclick="switchMode('game')">Desafio Diário</button>
+  </div>
+
+  <div class="calculator" id="calc-mode">
+    <input type="text" id="display" disabled />
+
+    <div class="buttons">
+      <button onclick="playClick();clearDisplay()">C</button>
+      <button onclick="playClick();deleteLast()">←</button>
+      <button onclick="playClick();append('%')">%</button>
+      <button onclick="playClick();append('/')">÷</button>
+
+      <button onclick="playClick();append('7')">7</button>
+      <button onclick="playClick();append('8')">8</button>
+      <button onclick="playClick();append('9')">9</button>
+      <button onclick="playClick();append('*')">×</button>
+
+      <button onclick="playClick();append('4')">4</button>
+      <button onclick="playClick();append('5')">5</button>
+      <button onclick="playClick();append('6')">6</button>
+      <button onclick="playClick();append('-')">−</button>
+
+      <button onclick="playClick();append('1')">1</button>
+      <button onclick="playClick();append('2')">2</button>
+      <button onclick="playClick();append('3')">3</button>
+      <button onclick="playClick();append('+')">+</button>
+
+      <button onclick="playClick();append('0')" class="zero">0</button>
+      <button onclick="playClick();append('.')">.</button>
+      <button onclick="playClick();calculate()">=</button>
+    </div>
+  </div>
+
+  <div class="game" id="game-mode" style="display:none;">
+    <h2>Desafio Diário 🍄</h2>
+    <div id="challenge"></div>
+    <input type="text" id="answer" placeholder="Sua resposta" />
+    <button onclick="playClick();checkAnswer()">Responder</button>
+    <p id="feedback"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

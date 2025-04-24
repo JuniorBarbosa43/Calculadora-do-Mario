@@ -1,0 +1,105 @@
+body {
+    font-family: 'Comic Sans MS', cursive;
+    color: #fff;
+    text-align: center;
+  }
+
+  html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  background-image: url("https://github.com/Kageetai/mario-background-parallax/blob/master/img/mario.gif?raw=true"), url("https://github.com/Kageetai/mario-background-parallax/blob/master/img/ground.png?raw=true"), url("https://github.com/Kageetai/mario-background-parallax/blob/master/img/bushes.png?raw=true"), url("https://raw.githubusercontent.com/Kageetai/mario-background-parallax/master/img/back.png?raw=true");
+  background-color: #f8e0b0;
+  background-repeat: no-repeat, repeat-x, repeat-x, repeat-x;
+  background-position: left 30% bottom 22px, left 0px bottom 0px, left 0px bottom 22px, left 0px bottom 0px;
+  animation: back 15s infinite linear;
+}
+
+@keyframes back {
+  0% {
+    background-position: left 30% bottom 22px, left 0px bottom 0px, left 0px bottom 22px, left 0px bottom 0px;
+  }
+  50% {
+    background-position: left 50% bottom 22px, left -816px bottom 0px, left -508px bottom 22px, left -256px bottom 0px;
+  }
+  100% {
+    background-position: left 30% bottom 22px, left -1632px bottom 0px, left -1016px bottom 22px, left -512px bottom 0px;
+  }
+}
+  
+  .tabs {
+    margin-bottom: 20px;
+  }
+  
+  .tabs button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ffcd4b;
+    color: #000;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .tabs button.active {
+    background-color: #ff5733;
+    color: white;
+  }
+  
+  .calculator, .game {
+    background: #004aad;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 350px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  
+  #display, #answer {
+    width: 90%;
+    font-size: 24px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  button {
+    background-color: #ffcd4b;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+  }
+  
+  .zero {
+    grid-column: span 2;
+  }
+  
+  #feedback {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
