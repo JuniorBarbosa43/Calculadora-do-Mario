@@ -12,14 +12,12 @@
   <audio id="clickSound" src="midia/Audio/mario-coin.mp3" preload="auto"></audio>
   <audio id="failSound" src="midia/Audio/mario-death.mp3" preload="auto"></audio>
   <audio id="newRecordSound" src="midia/Audio/sm64_yahoo.mp3" preload="auto"></audio>
-
   <audio id="loseLifeSound" src="midia/Audio/super-mario-pipe.mp3" preload="auto"></audio>
   <audio id="jumpSound" src="midia/Audio/mario-jump.mp3" preload="auto"></audio>
-  <audio id="streak3Sound" src="midia/Audio/mario-1-up.mp3" preload="auto"></audio>
+  <audio id="streakSound" src="midia/Audio/mario-1-up.mp3" preload="auto"></audio>
   <audio id="trueGameOverSound" src="midia/Audio/super-mario-death.mp3" preload="auto"></audio>
   <audio id="coinSound" src="midia/Audio/mario-coin.mp3" preload="auto"></audio>
   <audio id="powerUpSound" src="midia/Audio/1up.mp3" preload="auto"></audio>
-
 
   <div class="top-controls">
     <button id="muteButton" onclick="toggleMute()" title="Ativar/Desativar Som (M)">🔊</button>
@@ -73,20 +71,27 @@
         </div>
     </div>
     <div class="game-stats">
+      <div class="stat-item difficulty-selector">
         Dificuldade:
-        <div class="difficulty-selector">
-            <button id="btnEasy" onclick="setDifficulty('easy')">Fácil</button>
-            <button id="btnMedium" onclick="setDifficulty('medium')" class="active-difficulty">Médio</button>
-            <button id="btnHard" onclick="setDifficulty('hard')">Difícil</button>
+        <div>
+          <button id="btnEasy" onclick="setDifficulty('easy')">Fácil</button>
+          <button id="btnMedium" onclick="setDifficulty('medium')" class="active-difficulty">Médio</button>
+          <button id="btnHard" onclick="setDifficulty('hard')">Difícil</button>
         </div>
-        <div class="lives-display">Vidas: <span id="livesCount">❤️❤️❤️</span></div>
-        <div class="streak-display">Streak: <span id="streakCount">0</span> 🔥</div>
+      </div>
+      <div class="stat-item lives-display">Vidas: <span id="livesCount"></span></div>
+      <div class="stat-item streak-display">Streak: <span id="streakCount">0</span> 🔥</div>
+    </div>
+
+    <div class="streak-meter" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="Progresso para o próximo power-up">
+      <div class="streak-progress" id="streakProgress"></div>
+      <img src="midia/elementos/SuperMushroom.png" class="streak-goal-icon" alt="Power-up">
     </div>
 
     <div class="timer-display" id="timerDisplay">Tempo: <span id="timeLeft">--</span>s</div>
 
     <div class="mario-character-container">
-        <img id="marioCharacter" src="midia/Skins/DefaultMario/mario.gif" alt="Mario" class="">
+        <img id="marioCharacter" src="midia/Skins/DefaultMario/mario-static.png" alt="Mario" class="">
     </div>
 
     <div id="challenge" aria-live="polite">Carregando desafio...</div>
@@ -109,4 +114,4 @@
 
   <script src="script.js"></script>
 </body>
-</html>
+</html> 
