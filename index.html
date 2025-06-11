@@ -3,60 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora Mario</title>
+  <title>Calculadora Mario Turbo</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="midia/mario-icon.png" type="image/png">
 </head>
 <body>
 
-  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/mario-coin.mp3"></audio>
-  <audio id="failSound" src="midia/Mario Death - QuickSounds.com.mp3"></audio>
+  <audio id="clickSound" src="midia/Audio/mario-coin.mp3" preload="auto"></audio>
+  <audio id="failSound" src="midia/Audio/mario-death.mp3" preload="auto"></audio>
+  <audio id="newRecordSound" src="midia/Audio/sm64_yahoo.mp3" preload="auto"></audio>
 
+  <audio id="loseLifeSound" src="midia/Audio/super-mario-pipe.mp3" preload="auto"></audio>
+  <audio id="jumpSound" src="midia/Audio/mario-jump.mp3" preload="auto"></audio>
+  <audio id="streak3Sound" src="midia/Audio/mario-1-up.mp3" preload="auto"></audio>
+  <audio id="trueGameOverSound" src="midia/Audio/super-mario-death.mp3" preload="auto"></audio>
+  <audio id="coinSound" src="midia/Audio/mario-coin.mp3" preload="auto"></audio>
+  <audio id="powerUpSound" src="midia/Audio/1up.mp3" preload="auto"></audio>
+
+
+  <div class="top-controls">
+    <button id="muteButton" onclick="toggleMute()" title="Ativar/Desativar Som (M)">🔊</button>
+  </div>
 
   <div class="tabs">
     <button onclick="switchMode('calc')" class="active">Calculadora</button>
-    <button onclick="switchMode('game')">Desafio Diário</button>
+    <button onclick="switchMode('game')">Desafios Turbo 🍄</button>
+    <button onclick="switchMode('shop')">Loja 🛒</button>
   </div>
 
   <div class="calculator" id="calc-mode">
-    <input type="text" id="display" disabled />
-
+    <div class="display-container">
+        <input type="text" id="display" disabled aria-label="Visor da Calculadora" />
+    </div>
     <div class="buttons">
-      <button onclick="playClick();clearDisplay()">C</button>
-      <button onclick="playClick();deleteLast()">←</button>
-      <button onclick="playClick();append('%')">%</button>
-      <button onclick="playClick();append('/')">÷</button>
-
-      <button onclick="playClick();append('7')">7</button>
-      <button onclick="playClick();append('8')">8</button>
-      <button onclick="playClick();append('9')">9</button>
-      <button onclick="playClick();append('*')">×</button>
-
-      <button onclick="playClick();append('4')">4</button>
-      <button onclick="playClick();append('5')">5</button>
-      <button onclick="playClick();append('6')">6</button>
-      <button onclick="playClick();append('-')">−</button>
-
-      <button onclick="playClick();append('1')">1</button>
-      <button onclick="playClick();append('2')">2</button>
-      <button onclick="playClick();append('3')">3</button>
-      <button onclick="playClick();append('+')">+</button>
-
-      <button onclick="playClick();append('0')" class="zero">0</button>
-      <button onclick="playClick();append('.')">.</button>
-      <button onclick="playClick();calculate()">=</button>
+      <button onclick="clearDisplay()" aria-label="Limpar tudo (C ou Esc)">C</button>
+      <button onclick="deleteLast()" aria-label="Apagar último caractere (Backspace)">←</button>
+      <button onclick="invertSign()" aria-label="Inverter Sinal (Shift + - ou _)">±</button>
+      <button onclick="append('/')" aria-label="Dividir (/)">÷</button>
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')" aria-label="Multiplicar (*)">×</button>
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')" aria-label="Subtrair (-)">−</button>
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')" aria-label="Somar (+)">+</button>
+      <button onclick="append('0')" class="zero">0</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="calculate()" aria-label="Igual (= ou Enter)">=</button>
+    </div>
+    <div class="history-container">
+        <h3>Histórico</h3>
+        <ul id="historyList"></ul>
+        <button id="clearHistoryButton" onclick="clearCalcHistory()">Limpar Histórico</button>
     </div>
   </div>
 
   <div class="game" id="game-mode" style="display:none;">
-    <h2>Desafio Diário 🍄</h2>
-    <div id="challenge"></div>
-    <input type="text" id="answer" placeholder="Sua resposta" />
-    <button onclick="playClick();checkAnswer()">Responder</button>
-    <p id="feedback"></p>
+    <div class="game-header">
+        <h2>Desafios Turbo 🍄</h2>
+        <div class="score-board">
+            Pontos: <span id="score">0</span> <br>
+            Recorde: <span id="highScore">0</span> <br>
+            Moedas: <span id="coins">0</span> <img src="midia/elementos/Coin.gif" alt="Moeda" class="coin-icon">
+        </div>
+    </div>
+    <div class="game-stats">
+        Dificuldade:
+        <div class="difficulty-selector">
+            <button id="btnEasy" onclick="setDifficulty('easy')">Fácil</button>
+            <button id="btnMedium" onclick="setDifficulty('medium')" class="active-difficulty">Médio</button>
+            <button id="btnHard" onclick="setDifficulty('hard')">Difícil</button>
+        </div>
+        <div class="lives-display">Vidas: <span id="livesCount">❤️❤️❤️</span></div>
+        <div class="streak-display">Streak: <span id="streakCount">0</span> 🔥</div>
+    </div>
+
+    <div class="timer-display" id="timerDisplay">Tempo: <span id="timeLeft">--</span>s</div>
+
+    <div class="mario-character-container">
+        <img id="marioCharacter" src="midia/Skins/DefaultMario/mario.gif" alt="Mario" class="">
+    </div>
+
+    <div id="challenge" aria-live="polite">Carregando desafio...</div>
+    <input type="text" id="answer" placeholder="Sua resposta" aria-label="Campo para resposta do desafio (Enter para enviar)" />
+    <div class="game-buttons">
+        <button onclick="checkAnswer()" id="checkAnswerButton">Responder</button>
+        <button onclick="generateChallenge()" id="nextChallengeButton" style="display:none;">Próximo Desafio</button>
+        <button onclick="startGame()" id="startGameButton" style="display:none;">Iniciar Novo Jogo</button>
+    </div>
+    <p id="feedback" aria-live="assertive"></p>
+    <div id="toastNotification" class="toast" role="alert"></div>
+  </div>
+
+  <div class="shop" id="shop-mode" style="display:none;">
+    <h2>Loja de Skins 🛒</h2>
+    <p>Suas Moedas: <span id="shopCoins">0</span> <img src="midia/elementos/Coin.gif" alt="Moeda" class="coin-icon"></p>
+    <div id="skinsContainer" class="skins-container">
+      </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
